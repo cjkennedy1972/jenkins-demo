@@ -62,6 +62,7 @@ spec:
       container('kubectl') { 
       sh "kubectl apply -f k8s.yaml --record"
       }
-    }
+   }
   }
+ }
 }
