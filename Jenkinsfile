@@ -55,17 +55,12 @@ spec:
     stage('Test') {
       echo "2.Test Stage"
     }
-    stage('Kustomize') {
-      container('kustomize') {
-        echo "3. Set Image"
-        sh "kustomize edit set image harbor.sixwords.dev/jenkins/jenkins-demo:v$BUILD_NUMBER"
-    }    
-      stage('Deploy') {
-        container('kubectl') { 
-          echo "4. Deploy Pod"
-          sh "kubectl apply -f k8s.yaml --record"
+    stage('Deploy') {
+      container('kubectl') { 
+        echo "4. Deploy Pod"
+        sh "kubectl kustomize"
+        sh "kubectl apply -f k8s.yaml --record"
       }
    }
   }
  }
-}
