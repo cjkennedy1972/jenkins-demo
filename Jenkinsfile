@@ -11,6 +11,9 @@ spec:
     env:
     - name: IMAGE_TAG
       value: ${BUILD_NUMBER}
+    volumeMounts:
+    - name: harbor-config
+      mountPath: /root/.docker
   - name: kubectl
     image: gcr.io/cloud-builders/kubectl
     command:
