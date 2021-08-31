@@ -13,7 +13,7 @@ spec:
         app: jenkins-demo
     spec:
       containers:
-      - image: harbor.sixwords.dev/library/jenkins/jenkins-demo:<BUILD_TAG>
+      - image: harbor.sixwords.dev/library/jenkins/jenkins-demo:latest
         imagePullPolicy: IfNotPresent
         name: jenkins-demo
         env:
