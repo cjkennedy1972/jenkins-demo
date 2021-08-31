@@ -52,12 +52,15 @@ spec:
     stage('Test') {
       echo "2.Test Stage"
     }
-    stage('Deploy') {
+    stage('Kustomize') {
       container('kustomize') {
         echo "5. Deploy Stage"
         if (env.BRANCH_NAME == 'master') 
         sh "kustomize edit set image harbor.sixwords.dev/jenkins/jenkins-demo:v$BUILD_NUMBER"
-        sh "kubectl apply -f k8s.yaml --record"
+    }    
+    stage('Deploy') {   
+      container('kubectl') { 
+      sh "kubectl apply -f k8s.yaml --record"
       }
     }
   }
