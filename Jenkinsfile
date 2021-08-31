@@ -53,11 +53,10 @@ spec:
       echo "2.Test Stage"
     }
     stage('Deploy') {
-      container('kubectl') {
+      container('kustomize') {
         echo "5. Deploy Stage"
         if (env.BRANCH_NAME == 'master') 
-        sh "sed -i 's/<BUILD_TAG>/v${BUILD_NUMBER}/' k8s.yaml"
-        sh "sed -i 's/<BRANCH_NAME>/${BRANCH_NAME}/' k8s.yaml"
+        sh "kustomize edit set image harbor.sixwords.io/jenkins/jenkins-demo:v$BUILD_NUMBER"
         sh "kubectl apply -f k8s.yaml --record"
       }
     }
